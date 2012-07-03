@@ -1,0 +1,13 @@
+<div id="login">
+  <div class="form_container">
+    <% if current_user %>
+      <p class="top-links">
+        <strong>Welcome, <%= current_user.full_name %></strong>
+        <span>|</span>
+        <%= link_to "Logout", logout_path %>
+      </p>
+    <% else %>
+      <%= render :partial => "sessions/login_form" %>
+    <% end %>
+  </div> 
+</div>

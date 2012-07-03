@@ -37,4 +37,4 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'debugger'
 
-gem "parse_resource", "~> 1.7.1"
+gem "parse_resource", :path => '/Users/chris/rails/parse_resource'  #:git => 'git://github.com/testflyjets/parse_resource.git'
