@@ -1,0 +1,9 @@
+2012-07-05
+
+- curl HTTP request to post a file to Parse.com:
+curl -X POST -H "X-Parse-Application-Id: 1E8OSPnGon2fwhowEKeOItYHqr25oYh6MaDFjbaI" -H "X-Parse-REST-API-Key: eEwOWh2OxEWnxKYcI0LQILF3JD6GNPMAHKsIU5QF" -H "Content-Type: image/jpeg" --data-binary '@artwork.jpg' https://api.parse.com/1/files/artwork.jpg
+-- response: {"url":"http://files.parse.com/b4b730ad-47de-46ae-9eac-31ce2c390694/9e30b842-b7c9-4d72-97f0-e62d67759119-artwork.jpg","name":"9e30b842-b7c9-4d72-97f0-e62d67759119-artwork.jpg"}
+
+- HTTP request to try to post a file to an object:
+curl -X POST -H "X-Parse-Application-Id: 1E8OSPnGon2fwhowEKeOItYHqr25oYh6MaDFjbaI" -H "X-Parse-REST-API-Key: eEwOWh2OxEWnxKYcI0LQILF3JD6GNPMAHKsIU5QF" -H "Content-Type: application/json" -d '{"zapCard" : {"objectId" : "iQmU8XiSEP", "__type" : "zapCards"}, "fileType" : "image", "image": { "name" : "9e30b842-b7c9-4d72-97f0-e62d67759119-artwork.jpg", "__type": "File"}}' https://api.parse.com/1/classes/moreInfo
+

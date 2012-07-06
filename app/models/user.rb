@@ -3,8 +3,18 @@ class User < ParseUser
   validates_presence_of :username
 
   # you can add fields, like any other kind of Object...
-  fields :firstName, :lastName
+  fields :firstName, :lastName, :proPackagePurchased
 
   # but note that email is a special field in the Parse API.
   fields :email
+  
+  has_many :zap_cards, :inverse_of => :cardOwner
+  
+  def full_name
+    "#{firstName} #{lastName}"
+  end
+  
+  def propack_status
+    proPackagePurchased ? "Active" : "Not Purchased"
+  end
 end
