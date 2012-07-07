@@ -14,7 +14,7 @@
     <% if current_user.proPackagePurchased %>
       <ul class="more_info">
         <% @more_info[card.cardName].each do |mi| %>
-          <li><%= mi.fileType %></li>
+          <li><%= link_to(mi.fileType, mi.attributes['image']['url']) %></li>
         <% end %>
       </ul>
     <% end %>
