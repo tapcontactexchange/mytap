@@ -1,5 +1,6 @@
-PATH
-  remote: /Users/chris/rails/parse_resource
+GIT
+  remote: git://github.com/testflyjets/parse_resource.git
+  revision: 06df9f059ad10340bc27232ea061afdaa3edbc56
   specs:
     parse_resource (1.7.296)
       activemodel
