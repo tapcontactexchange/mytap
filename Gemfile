@@ -39,3 +39,4 @@ gem 'jquery-rails'
 
 gem "parse_resource", :git =>  'git://github.com/testflyjets/parse_resource.git'
 # :path => '/Users/chris/rails/parse_resource'
+gem "vcard"

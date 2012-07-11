@@ -7,3 +7,38 @@ curl -X POST -H "X-Parse-Application-Id: 1E8OSPnGon2fwhowEKeOItYHqr25oYh6MaDFjba
 - HTTP request to try to post a file to an object:
 curl -X POST -H "X-Parse-Application-Id: 1E8OSPnGon2fwhowEKeOItYHqr25oYh6MaDFjbaI" -H "X-Parse-REST-API-Key: eEwOWh2OxEWnxKYcI0LQILF3JD6GNPMAHKsIU5QF" -H "Content-Type: application/json" -d '{"zapCard" : {"objectId" : "iQmU8XiSEP", "__type" : "zapCards"}, "fileType" : "image", "image": { "name" : "9e30b842-b7c9-4d72-97f0-e62d67759119-artwork.jpg", "__type": "File"}}' https://api.parse.com/1/classes/moreInfo
 
+2012-07-10
+
+VCard handling:
+
+Loading development environment (Rails 3.2.6)
+1.9.2p320 :001 > c=Contact.first
+ => #<Contact:0x15f9c58 @unsaved_attributes={}, @attributes={"abItem"=>{"__type"=>"Bytes", "base64"=>"QkVHSU46VkNBUkQKVkVSU0lPTjozLjAKTjpWb2hyYTtBbWFuOzs7CkZOOkFtYW4gVm9ocmEKRU1BSUw7dHlwZT1JTlRFUk5FVDt0eXBlPVdPUks6YW1hbnZAdGhldW5ib3VuZGVkLmNvbQpURUw7dHlwZT1DRUxMOig2NzgpIDM2OC0yOTc5CkVORDpWQ0FSRA=="}, "itemOwner"=>{"__type"=>"Pointer", "className"=>"_User", "objectId"=>"un2h5vZqBe"}, "abRecordId"=>89, "createdAt"=>"2012-07-01T22:09:51.518Z", "updatedAt"=>"2012-07-03T04:32:49.461Z", "objectId"=>"86EJ12EZft"}> 
+1.9.2p320 :002 > vc=c.attributes['abItem']['base64']
+ => "QkVHSU46VkNBUkQKVkVSU0lPTjozLjAKTjpWb2hyYTtBbWFuOzs7CkZOOkFtYW4gVm9ocmEKRU1BSUw7dHlwZT1JTlRFUk5FVDt0eXBlPVdPUks6YW1hbnZAdGhldW5ib3VuZGVkLmNvbQpURUw7dHlwZT1DRUxMOig2NzgpIDM2OC0yOTc5CkVORDpWQ0FSRA==" 
+1.9.2p320 :003 > vcard = Base64.decode64(vc)
+ => "BEGIN:VCARD\nVERSION:3.0\nN:Vohra;Aman;;;\nFN:Aman Vohra\nEMAIL;type=INTERNET;type=WORK:amanv@theunbounded.com\nTEL;type=CELL:(678) 368-2979\nEND:VCARD" 
+1.9.2p320 :004 > Vpim::Vcard.decode(vcard)
+ => [BEGIN:VCARD
+VERSION:3.0
+N:Vohra;Aman;;;
+FN:Aman Vohra
+EMAIL;type=INTERNET;type=WORK:amanv@theunbounded.com
+TEL;type=CELL:(678) 368-2979
+END:VCARD
+] 
+1.9.2p320 :005 > cont=Vpim::Vcard.decode(vcard).first
+ => BEGIN:VCARD
+VERSION:3.0
+N:Vohra;Aman;;;
+FN:Aman Vohra
+EMAIL;type=INTERNET;type=WORK:amanv@theunbounded.com
+TEL;type=CELL:(678) 368-2979
+END:VCARD
+ 
+1.9.2p320 :006 > cont.telephones
+ => [#<Vpim::Vcard::Telephone: "(678) 368-2979", cell] 
+1.9.2p320 :007 > cont.emails
+ => [#<Vpim::Vcard::Email: "amanv@theunbounded.com", work] 
+1.9.2p320 :008 > cont.name
+ => #<Vpim::Vcard::Name:0x7745ac @family="Vohra", @given="Aman", @additional="", @prefix="", @suffix="", @fullname="Aman Vohra"> 
