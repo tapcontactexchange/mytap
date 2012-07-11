@@ -9,6 +9,7 @@ class User < ParseUser
   fields :email
   
   has_many :zap_cards, :inverse_of => :cardOwner
+  has_many :contacts,  :inverse_of => :itemOwner
   
   def full_name
     "#{firstName} #{lastName}"
