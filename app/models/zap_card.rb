@@ -7,6 +7,6 @@ class ZapCard < ParseResource::Base
          
   belongs_to :cardOwner, :class_name => 'User'
   
-  has_many :more_infos, :inverse_of => :zap_card
+  has_many :more_infos, :inverse_of => :zapCard
 
 end
