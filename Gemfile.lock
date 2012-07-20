@@ -1,8 +1,7 @@
-GIT
-  remote: git://github.com/testflyjets/parse_resource.git
-  revision: b70f1d2144bdf47550d4e03ed85f887bc92870ad
+PATH
+  remote: /Users/chris/rails/parse_resource
   specs:
-    parse_resource (1.7.297)
+    parse_resource (1.7.301)
       activemodel
       activesupport
       rest-client
