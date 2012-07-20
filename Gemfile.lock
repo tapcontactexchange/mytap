@@ -1,7 +1,7 @@
 PATH
   remote: /Users/chris/rails/parse_resource
   specs:
-    parse_resource (1.7.301)
+    parse_resource (1.7.307)
       activemodel
       activesupport
       rest-client
