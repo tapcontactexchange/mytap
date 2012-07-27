@@ -13,10 +13,14 @@
     <li><%= card.cardName %></li>
     <% if current_user.proPackagePurchased %>
       <ul class="more_info">
-        <% @more_info[card.cardName].each do |mi| %>
-          <li><%= link_to(mi.fileName.blank? ? mi.fileType : mi.fileName, mi.attributes['image']['url']) %></li>
+        <% card.more_infos.each do |mi| %>
+          <li><%= link_to(mi.fileName.blank? ? mi.fileType : mi.fileName, mi.image) %></li>
         <% end %>
       </ul>
+    <% end %>
+    <%= form_for card, :url => add_more_info_zap_card_path(card), :method => :post, :multipart => true do |f| %>
+      <%= f.file_field :more_info_file %>
+      <%= submit_tag "Upload" %>
     <% end %>
   <% end %>
 </ul>

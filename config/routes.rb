@@ -4,7 +4,11 @@ Zap::Application.routes.draw do
   
   resources :sessions, :only => [:new, :create, :destroy]
   
-  resources :zap_cards, :only => [:index, :show]
+  resources :zap_cards, :only => [:index, :show] do
+    member do
+      post 'add_more_info'
+    end
+  end
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
