@@ -1,7 +1,7 @@
 class ZapCardsController < ApplicationController
   
   def index
-    @zap_cards = current_user.zap_cards.find(:include => :more_infos)
+    @zap_cards = current_user.zap_cards
   end
 
   def show
@@ -9,9 +9,13 @@ class ZapCardsController < ApplicationController
   
   def add_more_info
     zap_card = ZapCard.find(params[:id])
-    more_info = zap_card.more_infos.build
-    more_info.uploaded_file = params[:zap_card][:more_info_file])
-    result = more_info.create_file(more_info_file)
-    raise result.inspect
+    more_info = MoreInfo.new(:zapCard => zap_card.to_pointer)
+    more_info.image = params[:zap_card][:more_info_file]
+    
+    more_info.fileType = more_info.image.content_type
+    more_info.fileName = more_info.image.original_filename
+    more_info.save
+    
+    redirect_to zap_cards_path
   end
 end

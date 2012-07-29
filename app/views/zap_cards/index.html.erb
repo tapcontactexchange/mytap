@@ -14,7 +14,7 @@
     <% if current_user.proPackagePurchased %>
       <ul class="more_info">
         <% card.more_infos.each do |mi| %>
-          <li><%= link_to(mi.fileName.blank? ? mi.fileType : mi.fileName, mi.image) %></li>
+          <li><%= link_to(mi.fileName.blank? ? mi.fileType : mi.fileName, mi.image.url) %></li>
         <% end %>
       </ul>
     <% end %>
