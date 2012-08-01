@@ -7,6 +7,7 @@ Zap::Application.routes.draw do
   resources :zap_cards, :only => [:index, :show] do
     member do
       post 'add_more_info'
+      post 'remove_more_info'
     end
   end
   

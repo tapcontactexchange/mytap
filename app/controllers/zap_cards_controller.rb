@@ -18,4 +18,11 @@ class ZapCardsController < ApplicationController
     
     redirect_to zap_cards_path
   end
+  
+  def remove_more_info
+    more_info = MoreInfo.find(params[:more_info])
+    more_info.destroy
+    
+    redirect_to zap_cards_path
+  end
 end

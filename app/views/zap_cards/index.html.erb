@@ -14,13 +14,18 @@
     <% if current_user.proPackagePurchased %>
       <ul class="more_info">
         <% card.more_infos.each do |mi| %>
-          <li><%= link_to(mi.fileName.blank? ? mi.fileType : mi.fileName, mi.image.url) %></li>
+          <li>
+            <%= render :partial => "more_info", :locals => {:card => card, :mi => mi} %>
+          </li>
         <% end %>
       </ul>
     <% end %>
-    <%= form_for card, :url => add_more_info_zap_card_path(card), :method => :post, :multipart => true do |f| %>
-      <%= f.file_field :more_info_file %>
-      <%= submit_tag "Upload" %>
+    
+    <% if card.more_infos.size < 4 %>
+      <%= form_for card, :url => add_more_info_zap_card_path(card), :method => :post, :multipart => true do |f| %>
+        <%= f.file_field :more_info_file %>
+        <%= submit_tag "Upload" %>
+      <% end %>
     <% end %>
   <% end %>
 </ul>
