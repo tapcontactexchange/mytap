@@ -11,9 +11,9 @@ class ZapCardsController < ApplicationController
     zap_card = ZapCard.find(params[:id])
     more_info = MoreInfo.new(:zapCard => zap_card.to_pointer)
     more_info.image = params[:zap_card][:more_info_file]
+    more_info.fileName = params[:zap_card][:file_name] || more_info.image.original_filename
     
     more_info.fileType = more_info.image.content_type
-    more_info.fileName = more_info.image.original_filename
     more_info.save
     
     redirect_to zap_cards_path
@@ -21,6 +21,9 @@ class ZapCardsController < ApplicationController
   
   def remove_more_info
     more_info = MoreInfo.find(params[:more_info])
+    # HACK!  Need to force MoreInfo to initialize the image
+    # as a ParseFile object -- really should do this in the ParseFile code
+    more_info.image
     more_info.destroy
     
     redirect_to zap_cards_path

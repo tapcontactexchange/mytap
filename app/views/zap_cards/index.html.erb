@@ -19,12 +19,14 @@
           </li>
         <% end %>
       </ul>
-    <% end %>
-    
-    <% if card.more_infos.size < 4 %>
-      <%= form_for card, :url => add_more_info_zap_card_path(card), :method => :post, :multipart => true do |f| %>
-        <%= f.file_field :more_info_file %>
-        <%= submit_tag "Upload" %>
+      <% if card.more_infos.size < 4 %>
+        <%= form_for card, :url => add_more_info_zap_card_path(card), :method => :post, :multipart => true do |f| %>
+          <label>More Info file:</label><%= f.file_field :more_info_file %>
+          <br/>
+          <label>File description (optional)</label><%= f.text_field :file_name %>
+          <br/>
+          <%= submit_tag "Upload" %>
+        <% end %>
       <% end %>
     <% end %>
   <% end %>

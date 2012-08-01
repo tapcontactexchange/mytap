@@ -8,5 +8,7 @@ class ZapCard < ParseResource::Base
   belongs_to :cardOwner, :class_name => 'User'
   
   has_many :more_infos, :inverse_of => :zapCard
+  
+  attr_accessor :more_info_file, :file_name
 
 end
