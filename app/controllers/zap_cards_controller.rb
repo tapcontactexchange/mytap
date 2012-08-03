@@ -11,9 +11,10 @@ class ZapCardsController < ApplicationController
     zap_card = ZapCard.find(params[:id])
     more_info = MoreInfo.new(:zapCard => zap_card.to_pointer)
     more_info.image = params[:zap_card][:more_info_file]
-    more_info.fileName = params[:zap_card][:file_name] || more_info.image.original_filename
+    more_info.fileName = more_info.image.original_filename
+    more_info.fileTitle = params[:zap_card][:file_title]
     
-    more_info.fileType = more_info.image.content_type
+    more_info.fileType = more_info.image.file_ext
     more_info.save
     
     redirect_to zap_cards_path

@@ -9,6 +9,6 @@ class ZapCard < ParseResource::Base
   
   has_many :more_infos, :inverse_of => :zapCard
   
-  attr_accessor :more_info_file, :file_name
+  attr_accessor :more_info_file, :file_title
 
 end

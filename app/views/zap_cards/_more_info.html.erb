@@ -1,3 +1,3 @@
-<%= link_to(mi.fileName.blank? ? mi.fileType : mi.fileName, mi.image.url) %>
+<%= link_to(mi.fileTitle.blank? ? mi.fileName : mi.fileTitle, mi.image.url) %>
 <%= link_to "Delete", remove_more_info_zap_card_path(card, :more_info => mi), :method => :post,
   :data => { :confirm => "Are you sure you want to delete this More Info?" } %>

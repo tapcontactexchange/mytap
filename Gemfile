@@ -43,7 +43,7 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'debugger'
 
-gem "parse_resource", :git => 'git://github.com/testflyjets/parse_resource.git'
+gem "parse_resource", :git =>  'git://github.com/testflyjets/parse_resource.git'
 # :git =>  'git://github.com/testflyjets/parse_resource.git'
 # :path => '/Users/chris/rails/parse_resource'
 gem "vcard"
