@@ -46,6 +46,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.3.3)
+    dalli (2.1.0)
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -100,6 +101,7 @@ GEM
       hike (~> 1.2)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
+    sqlite3 (1.3.6)
     thor (0.15.4)
     tilt (1.3.3)
     treetop (1.4.10)
@@ -116,10 +118,12 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
+  dalli
   jquery-rails
   parse_resource!
   pg
   rails (= 3.2.6)
   sass-rails (~> 3.2.3)
+  sqlite3
   uglifier (>= 1.0.3)
   vcard
