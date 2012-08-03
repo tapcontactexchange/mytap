@@ -1,2 +1,0 @@
-module ZapcardsHelper
-end
