@@ -1,7 +1,7 @@
 class ZapCardsController < ApplicationController
   
   def index
-    @zap_cards = current_user.zap_cards
+    @zap_cards = ZapCard.where(:active => "1", :cardOwner => current_user.to_pointer).all
   end
 
   def show

@@ -2,9 +2,11 @@ class ZapCard < ParseResource::Base
   
   resource_class_name 'zapCards'
   
-  fields :active, :cardName, :cardOwner, :city, :city2, :company, :companyMain, :country, :country2,
-         :firstName, :home, :homeEmail, :homeFax, :homePage, :iPhone, :image, :lastName
-         
+  fields :active, :cardName, :cardOwner, :city, :company, :companyMain, :country,
+         :firstName, :home, :homeEmail, :homeFax, :homePage, :iPhone, :lastName,
+         :mobile, :otherEmail, :state, :street, :title, :work, :workEmail, :workFax,
+         :zip
+                  
   belongs_to :cardOwner, :class_name => 'User'
   
   has_many :more_infos, :inverse_of => :zapCard
