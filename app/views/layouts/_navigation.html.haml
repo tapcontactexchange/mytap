@@ -1,4 +1,14 @@
-= link_to "ZAP App", root_path, :class => 'brand'
+= link_to "Home", root_path, :class => 'brand'
+%ul.nav
+  %li
+    = link_to "Features", '#'
+  %li
+    = link_to "About Us", '#'
+  %li
+    = link_to "FAQ", '#'
+  %li
+    = link_to "Contact Us", '#'
+    
 %ul.nav.pull-right
   - if signed_in?
     %li
