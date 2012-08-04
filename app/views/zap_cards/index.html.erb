@@ -1,13 +1,10 @@
-<h3>
-  ProPack status: <%= current_user.propack_status %>
-</h3>
 <% if !current_user.proPackagePurchased %>
   <p>
     You have not purchased the ProPack yet.  In order to upload files to your Zap cards
     please purchase the ProPack via Zap on your smart phone and then log back in here.
   </p>
 <% end %>
-<h2>Zap Cards for <%= current_user.full_name %></h2>
+<h2>Your Zap Cards</h2>
 <ul class="zap_cards">
   <% @zap_cards.each do |card| %>
     <li><b><%= card.cardName %></b></li>
