@@ -1,5 +1,8 @@
 Zap::Application.routes.draw do
 
+  get  "users/forgot_password"
+  post "users/reset_password"
+
   match "logout" => "sessions#destroy",  :as => :logout
   
   resources :sessions, :only => [:new, :create, :destroy]

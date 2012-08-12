@@ -1,10 +1,10 @@
 <% if !current_user.proPackagePurchased %>
   <p>
-    You have not purchased the ProPack yet.  In order to upload files to your Zap cards
-    please purchase the ProPack via Zap on your smart phone and then log back in here.
+    You have not purchased the ProPack yet.  In order to upload files to your TAP cards
+    please purchase the ProPack via Tap on your smart phone and then log back in here.
   </p>
 <% end %>
-<h2>Your Zap Cards</h2>
+<h2>My TAP Cards</h2>
 <ul class="zap_cards">
   <% @zap_cards.each do |card| %>
     <li><b><%= card.cardName %></b></li>

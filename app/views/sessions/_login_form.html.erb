@@ -1,6 +1,6 @@
 <%= form_tag sessions_path do %>
   <div class="field email">
-    <strong><%= label_tag :username, "User name:" %></strong>
+    <strong><%= label_tag :username, "Phone Number:" %></strong>
     <%= text_field_tag :username, params[:username] %>
   </div>
   <div class="field">
@@ -8,4 +8,5 @@
     <%= password_field_tag :password %>
   </div>
   <%= submit_tag "Log in", :class => 'btn' %>
+  <%= link_to "Forgot your password?", users_forgot_password_path %>
 <% end %>
