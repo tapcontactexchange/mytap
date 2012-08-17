@@ -1,22 +1,30 @@
-<h3>
-  ProPack status: <%= current_user.propack_status %>
-</h3>
 <% if !current_user.proPackagePurchased %>
   <p>
-    You have not purchased the ProPack yet.  In order to upload files to your Zap cards
-    please purchase the ProPack via Zap on your smart phone and then log back in here.
+    You have not purchased the ProPack yet.  In order to upload files to your TAP cards
+    please purchase the ProPack via Tap on your smart phone and then log back in here.
   </p>
 <% end %>
-<h2>Zap Cards for <%= current_user.full_name %></h2>
+<h2>My TAP Cards</h2>
 <ul class="zap_cards">
   <% @zap_cards.each do |card| %>
-    <li><%= card.cardName %></li>
+    <li><b><%= card.cardName %></b></li>
     <% if current_user.proPackagePurchased %>
       <ul class="more_info">
-        <% @more_info[card.cardName].each do |mi| %>
-          <li><%= link_to(mi.fileName.blank? ? mi.fileType : mi.fileName, mi.attributes['image']['url']) %></li>
+        <% card.more_infos.each do |mi| %>
+          <li>
+            <%= render :partial => "more_info", :locals => {:card => card, :mi => mi} %>
+          </li>
         <% end %>
       </ul>
+      <% if card.more_infos.size < 4 %>
+        <%= form_for card, :url => add_more_info_zap_card_path(card), :method => :post, :multipart => true do |f| %>
+          <label>More Info file:</label><%= f.file_field :more_info_file %>
+          <br/>
+          <label>File description (optional)</label><%= f.text_field :file_title %>
+          <br/>
+          <%= submit_tag "Upload", :class => 'btn' %>
+        <% end %>
+      <% end %>
     <% end %>
   <% end %>
 </ul>

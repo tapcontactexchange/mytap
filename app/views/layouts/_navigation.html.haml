@@ -1,0 +1,16 @@
+= link_to "Tap App", root_path, :class => 'brand'
+%ul.nav
+  %li
+    = link_to "Features", '#'
+  %li
+    = link_to "FAQ", '#'
+    
+%ul.nav.pull-right
+  - if signed_in?
+    %li
+      = link_to(current_user.full_name, '#')
+    %li
+      = link_to('Logout', logout_path, :method => 'delete')
+  - else
+    %li
+      = link_to('Login', new_session_path)

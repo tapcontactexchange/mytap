@@ -1,10 +1,18 @@
 Zap::Application.routes.draw do
 
+  get  "users/forgot_password"
+  post "users/reset_password"
+
   match "logout" => "sessions#destroy",  :as => :logout
   
   resources :sessions, :only => [:new, :create, :destroy]
   
-  resources :zap_cards, :only => [:index, :show]
+  resources :zap_cards, :only => [:index, :show] do
+    member do
+      post 'add_more_info'
+      post 'remove_more_info'
+    end
+  end
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
