@@ -12,5 +12,12 @@ class ZapCard < ParseResource::Base
   has_many :more_infos, :inverse_of => :zapCard
   
   attr_accessor :more_info_file, :file_title
+  
+  def first_name_last
+    "#{firstName} #{lastName}"
+  end
 
+  def card_name_key
+    self.cardName.downcase.gsub(/\s/, "_")
+  end
 end

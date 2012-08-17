@@ -1,0 +1,24 @@
+<div id="card_wrapper">
+  <div id="cards" class="basic ui-accordion">
+    <% @zap_cards.each do |card| %>
+      <%= link_to card.cardName, '#', :id => card.card_name_key, :class => 'toggle_more_info' %>
+      <div class="card_info">
+        <p class="name"><%= card.first_name_last %></p>
+        <%= content_tag(:p, card.organization) unless card.organization.blank? %>
+        <%= content_tag(:p, card.title) unless card.title.blank? %>
+      </div>
+    <% end %>
+  </div>
+  <div id="more_infos" class="basic">
+    <div class="title">
+      More Info
+    </div>
+    <% @zap_cards.each do |card| %>
+      <div id="<%= card.card_name_key %>" style="display:none;">
+        <% card.more_infos.each do |mi| %>
+          <%= render :partial => "more_info", :locals => {:card => card, :mi => mi} %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>  
+</div>

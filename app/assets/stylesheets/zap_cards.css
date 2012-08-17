@@ -1,0 +1,36 @@
+#card_wrapper {
+  height: 400px;
+  margin-top: 10px;
+}
+
+.basic {
+  border: 1px solid #ccc;
+  width: 300px;
+  height: 100%;
+  background-color: #ebebeb;
+  float: left;
+}
+
+.basic a {
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #999;
+  cursor: pointer;
+  display: block;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 4px;
+  outline: none;
+}
+
+.basic p {
+  font-size: 90%;
+  margin: 0;
+  padding: 10px;
+}
+
+#more_infos .title {
+  text-align: center;
+  padding: 8px;
+  color: #7f7f7f;
+  font-size: 150%;
+}
