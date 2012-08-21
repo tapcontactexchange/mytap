@@ -15,6 +15,10 @@ class User < ParseUser
     "#{firstName} #{lastName}"
   end
   
+  def pro_pack?
+    proPackagePurchased
+  end
+
   def propack_status
     proPackagePurchased ? "Active" : "Not Purchased"
   end

@@ -28,6 +28,10 @@
   padding: 10px;
 }
 
+.more_info {
+  padding: 10px;
+}
+
 #more_infos .title {
   text-align: center;
   padding: 8px;
@@ -35,7 +39,70 @@
   font-size: 150%;
 }
 
+#more_infos .more_info_wrapper {
+  float: left;
+  clear: both;
+  margin: 0 0 10px 0;
+}
+
 #more_infos a {
   border: none;
   font-weight: normal;
+  color: #3D3D3D;
+}
+
+#more_infos a.delete_link {
+  float: left;
+  padding-left: 10px;
+  color: #DA4F49;
+}
+
+a.file_link {
+  padding-left: 20px;
+  float: left;
+  font-size: 120%;
+}
+
+a.file_link:hover {
+  text-decoration: underline;
+}
+
+a.xls,
+a.xlsx {
+  background: transparent url(xls.png) no-repeat center left;
+}
+
+a.doc,
+a.docx {
+  background: transparent url(doc.png) no-repeat center left;
+}
+
+a.ppt,
+a.pptx {
+  background: transparent url(ppt.png) no-repeat center left;
+}
+
+a.image {
+  background: transparent url(image.png) no-repeat center left;
+}
+
+a.pdf {
+  background: transparent url(pdf.png) no-repeat center left;
+}
+
+.no_propack {
+  text-align: center;
+}
+
+.no_propack img {
+  height: 180px;
+  margin-top: 30px;
+}
+
+.no_propack p {
+  margin: 10px 20px;
+  text-align: center;
+  padding: 0;
+  color: #696969;
+  font-size: 100%;
 }
