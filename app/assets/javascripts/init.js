@@ -1,9 +1,12 @@
 $(function() {
   
-  $('#cards').accordion();
+  $('#cards').accordion({
+  	change: function(event, ui) { 
+  		$("#more_info_" + ui.oldHeader.attr("id")).hide();
+  		$("#more_info_" + ui.newHeader.attr("id")).show();
+  	}
+  });
   
-  // $('.toggle_more_info').each(
-  //   var cardKey = $(this).attr('id');
-  // 
-  // });
+  $("#more_infos").children(".more_info").first().show();
+  
 });

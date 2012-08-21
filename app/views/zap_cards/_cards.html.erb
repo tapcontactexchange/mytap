@@ -1,5 +1,5 @@
 <div id="card_wrapper">
-  <div id="cards" class="basic ui-accordion">
+  <div id="cards" class="basic">
     <% @zap_cards.each do |card| %>
       <%= link_to card.cardName, '#', :id => card.card_name_key, :class => 'toggle_more_info' %>
       <div class="card_info">
@@ -14,9 +14,15 @@
       More Info
     </div>
     <% @zap_cards.each do |card| %>
-      <div id="<%= card.card_name_key %>" style="display:none;">
+      <div id="more_info_<%= card.card_name_key %>" class="more_info" style="display:none;">
         <% card.more_infos.each do |mi| %>
           <%= render :partial => "more_info", :locals => {:card => card, :mi => mi} %>
+        <% end %>
+
+        <% if !card.more_infos.any? %>
+          <div class="no_more_info">
+            None yet...
+          </div>
         <% end %>
       </div>
     <% end %>
