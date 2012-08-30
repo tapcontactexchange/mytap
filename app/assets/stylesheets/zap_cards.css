@@ -43,6 +43,7 @@
   float: left;
   clear: both;
   margin: 0 0 10px 0;
+  width: 100%;
 }
 
 #more_infos a {
