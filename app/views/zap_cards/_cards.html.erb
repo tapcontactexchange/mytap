@@ -29,11 +29,11 @@
           <% if card.more_infos.size < 4 %>
 
             <%= form_for card, :url => add_more_info_zap_card_path(card), :method => :post, :multipart => true do |f| %>
-              <label>More Info file:</label><%= f.file_field :more_info_file, :class => 'btn' %>
+              <label>More Info file:</label><%= f.file_field :more_info_file %>
               <br/>
               <label>File description (optional)</label><%= f.text_field :file_title %>
               <br/>
-              <%= submit_tag "Upload", :class => 'btn' %>
+              <%= submit_tag "Upload", :class => 'btn btn-small btn-primary' %>
             <% end %>
           <% end %>
         </div>
