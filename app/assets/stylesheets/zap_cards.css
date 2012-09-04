@@ -58,6 +58,11 @@
   color: #DA4F49;
 }
 
+#more_infos .no_more_info {
+  color: #7F7F7F;
+  margin: 10px;
+}
+
 a.file_link {
   padding-left: 20px;
   float: left;

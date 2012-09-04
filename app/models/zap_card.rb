@@ -4,8 +4,8 @@ class ZapCard < ParseResource::Base
   
   fields :active, :cardName, :cardOwner, :city, :company, :companyMain, :country,
          :firstName, :home, :homeEmail, :homeFax, :homePage, :iPhone, :lastName,
-         :mobile, :otherEmail, :state, :street, :title, :work, :workEmail, :workFax,
-         :zip
+         :mobile, :otherEmail, :organization, :state, :street, :title, :work, 
+         :workEmail, :workFax, :zip
                   
   belongs_to :cardOwner, :class_name => 'User'
   

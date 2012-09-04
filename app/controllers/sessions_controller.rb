@@ -1,14 +1,14 @@
 class SessionsController < ApplicationController
   
   def new
-
+    session[:user] = nil
   end
 
   def create
     user = User.authenticate(params[:username], params[:password])
     if user
       session[:user] = user
-      redirect_to zap_cards_path, :notice => "Welcome back, #{current_user.full_name}!"
+      redirect_to zap_cards_path
     else
       flash.now.alert = "Invalid username or password"
       render "new"
