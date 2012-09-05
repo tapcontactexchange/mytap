@@ -9,20 +9,19 @@ class ZapCardsController < ApplicationController
   
   def add_more_info
     zap_card = ZapCard.find(params[:id])
-    puts "** creating MoreInfo"
     more_info = MoreInfo.new(:zapCard => zap_card.to_pointer)
-    puts "** setting more_info.image="
     more_info.image = params[:zap_card][:more_info_file]
-    puts "** more_info: #{more_info.inspect}"
-    puts "** more_info.image => #{more_info.image.class}"
-    
     more_info.fileName = more_info.image.original_filename
-    more_info.fileTitle = params[:zap_card][:file_title]
+    more_info.fileTitle = nil #params[:zap_card][:file_title]
     
     more_info.fileType = more_info.image.file_ext
-    more_info.save
-    
-    redirect_to zap_cards_path
+    if more_info.valid?
+      more_info.save
+      redirect_to zap_cards_path
+    else
+      flash[:error] = "Ooops! Please select a file and supply a title to upload a new More Info!"
+      redirect_to zap_cards_path
+    end
   end
   
   def remove_more_info

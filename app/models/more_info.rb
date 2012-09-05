@@ -8,4 +8,8 @@ class MoreInfo < ParseResource::Base
   
   belongs_to :zap_card
   
+  def valid?
+    !(self.fileName.blank? || self.fileTitle.blank?)
+  end
+  
 end
