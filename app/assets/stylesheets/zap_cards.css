@@ -64,7 +64,7 @@
 }
 
 a.file_link {
-  padding-left: 20px;
+  padding-left: 35px;
   float: left;
   font-size: 120%;
 }
@@ -88,14 +88,47 @@ a.pptx {
   background: transparent url(ppt.png) no-repeat center left;
 }
 
-a.image {
-  background: transparent url(image.png) no-repeat center left;
+a.png {
+  background: transparent url(png.png) no-repeat center left;
+}
+
+a.jpg,
+a.jpeg {
+  background: transparent url(jpg.png) no-repeat center left;
+}
+
+a.key {
+  background: transparent url(key.png) no-repeat center left;
+}
+
+a.numbers {
+  background: transparent url(numbers.png) no-repeat center left;
+}
+
+a.pages {
+  background: transparent url(pages.png) no-repeat center left;
 }
 
 a.pdf {
   background: transparent url(pdf.png) no-repeat center left;
 }
 
+a.txt {
+  background: transparent url(txt.png) no-repeat center left;
+}
+
+a.zip {
+  background: transparent url(zip.png) no-repeat center left;
+}
+
+a.mp4,
+a.video {
+  background: transparent url(video.png) no-repeat center left;
+}
+
+a.mp3 {
+  background: transparent url(mp3.png) no-repeat center left;
+}
 .no_propack {
   text-align: center;
 }

@@ -13,8 +13,8 @@ module ZapCardsHelper
 
   def file_link_class(more_info)
   	file_type = more_info.fileType.to_s
-  	if ['jpg', 'jpeg', 'png', 'gif'].include?(file_type)
-  		'image'
+  	if ['jpg', 'jpeg', 'image'].include?(file_type)
+  		'jpg'
   	else
   		file_type
   	end

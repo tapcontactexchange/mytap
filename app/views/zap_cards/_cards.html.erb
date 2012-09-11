@@ -22,7 +22,7 @@
           <% end %>
 
           <% if card.more_infos.size < 4 %>
-            <h4>Add a More Info file</h4>
+            <h4>Add another More Info file</h4>
             <%= form_for card, :url => add_more_info_zap_card_path(card), :method => :post, :multipart => true do |f| %>
               <label>File:</label><%= f.file_field :more_info_file %>
               <br/>
