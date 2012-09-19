@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     user = User.authenticate(params[:username], params[:password])
     if user
       self.current_user = user
-      redirect_to contacts_path #zap_cards_path
+      redirect_to zap_cards_path
     else
       flash.now.alert = "Invalid username or password"
       render "new"
