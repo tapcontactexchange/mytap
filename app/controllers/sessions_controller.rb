@@ -1,14 +1,14 @@
 class SessionsController < ApplicationController
   
   def new
-    session[:user] = nil
+    logout_killing_session!
   end
 
   def create
     user = User.authenticate(params[:username], params[:password])
     if user
-      session[:user] = user
-      redirect_to zap_cards_path
+      self.current_user = user
+      redirect_to contacts_path #zap_cards_path
     else
       flash.now.alert = "Invalid username or password"
       render "new"
@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:user] = nil
+    logout_keeping_session!
     redirect_to root_url, :notice => "You've been logged out!"
   end
   

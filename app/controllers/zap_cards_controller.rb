@@ -2,6 +2,7 @@ class ZapCardsController < ApplicationController
   
   def index
     @zap_cards = ZapCard.where(:active => "1", :cardOwner => current_user.to_pointer).all
+    @current_card = params[:current_card] || 0
   end
 
   def show
@@ -17,10 +18,10 @@ class ZapCardsController < ApplicationController
     more_info.fileType = more_info.image.file_ext
     if more_info.valid?
       more_info.save
-      redirect_to zap_cards_path
+      redirect_to zap_cards_path(:current_card => params[:current_card])
     else
       flash[:error] = "Ooops! Please select a file and supply a title to upload a new More Info!"
-      redirect_to zap_cards_path
+      redirect_to zap_cards_path(:current_card => params[:current_card])
     end
   end
   
@@ -31,6 +32,6 @@ class ZapCardsController < ApplicationController
     more_info.image
     more_info.destroy
     
-    redirect_to zap_cards_path
+    redirect_to zap_cards_path(:current_card => params[:current_card])
   end
 end
