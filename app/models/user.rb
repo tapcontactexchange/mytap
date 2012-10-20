@@ -10,6 +10,7 @@ class User < ParseUser
   
   has_many :zap_cards, :inverse_of => :cardOwner
   has_many :contacts,  :inverse_of => :itemOwner
+  has_many :devices,   :inverse_of => :user
   
   def full_name
     "#{firstName} #{lastName}"

@@ -2,9 +2,18 @@ class Contact < ParseResource::Base
   
   resource_class_name 'abContactBackup'
   
-  fields :abItem, :abRecordId, :itemOwner
+  fields :firstName, :lastName, :abItem, :abRecordId, :itemOwner, :abDisplayName
   
   belongs_to :itemOwner, :class_name => "User"
+  
+  # To query on string values in Parse you have to use regex:
+  #  
+  #  Contact.where(:lastName => {"$regex" => "^A+"})
+  #
+  # To get a user's contacts for a specific Device:  
+  def self.find_all_for_device(uuid)
+    Contact.where(:itemOwner => u.to_pointer).where(:uuid => "#{uuid}")
+  end
   
   def vcard
     @vcard ||= Vpim::Vcard.decode(self.abItem).first
@@ -30,12 +39,19 @@ class Contact < ParseResource::Base
     elsif !first_name.blank?
       first_name
     else
-      full_name
+      abDisplayName
     end
   end
   
+  def names
+    "[#{self.lastName}] : [#{self.firstName}] : [#{self.abDisplayName}]"
+  end
+  
   def <=>(other)
-    self.last_name_first.downcase <=> other.last_name_first.downcase
+    this_name = self.lastName || self.firstName || self.abDisplayName
+    other_name = other.lastName || other.firstName || other.abDisplayName
+    
+    this_name.to_s.downcase <=> other_name.to_s.downcase
   end
   
 end

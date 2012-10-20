@@ -1,8 +1,8 @@
 <h2>My Contacts</h2>
 
-Contacts:
+Contacts: <%= @contact_count %>
 <% @contacts.each do |contact| %>
   <p>
-    <%= contact.last_name_first %>
+    <%= contact.last_name_first %> - <%= contact.abDisplayName %>
   </p>
 <% end %>
