@@ -10,9 +10,29 @@ class Contact < ParseResource::Base
   #  
   #  Contact.where(:lastName => {"$regex" => "^A+"})
   #
-  # To get a user's contacts for a specific Device:  
-  def self.find_all_for_device(uuid)
-    Contact.where(:itemOwner => u.to_pointer).where(:uuid => "#{uuid}")
+  # To get a user's contacts for a specific Device:    
+  def self.all_for_user_device(user, device)
+    total_contacts = self.contact_query(user, device).count
+    contacts = []
+    while total_contacts > 0 && contacts.size < total_contacts do
+      contacts += self.contact_query(user, device).limit(1000).skip(contacts.size).all
+    end
+    contacts.sort
+  end
+  
+  # retrieve all the contacts for a user and device then
+  # group them in a hash with keys representing the first letter of the contact name
+  # group all the non-alpha contacts names in a single group 
+  def self.all_by_alpha_for_user_device(user, device)
+    contacts = self.all_for_user_device(user, device)
+    grouped_contacts = contacts.group_by{|c| c.last_name_first.upcase[0]}
+    non_alpha_keys = grouped_contacts.keys - ("A".."Z").to_a
+    non_alpha_keys.each do |key|
+      grouped_contacts.has_key?('#') ? grouped_contacts['#'] += grouped_contacts[key] 
+                                     : grouped_contacts['#'] = grouped_contacts[key]
+      grouped_contacts.delete(key)
+    end
+    grouped_contacts
   end
   
   def vcard
@@ -52,6 +72,12 @@ class Contact < ParseResource::Base
     other_name = other.lastName || other.firstName || other.abDisplayName
     
     this_name.to_s.downcase <=> other_name.to_s.downcase
+  end
+  
+  private
+  
+  def self.contact_query(user, device)
+    Contact.where(:itemOwner => user.to_pointer).where(:uuid => "#{device.uuid}")
   end
   
 end

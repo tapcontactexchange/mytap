@@ -23,4 +23,8 @@ class User < ParseUser
   def propack_status
     proPackagePurchased ? "Active" : "Not Purchased"
   end
+  
+  def self.admin
+    self.find_by_username '8585318451'
+  end
 end
