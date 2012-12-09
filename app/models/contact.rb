@@ -35,6 +35,10 @@ class Contact < ParseResource::Base
     grouped_contacts
   end
   
+  # vCard phones format:
+  #   display: display value of phone number
+  #   location: work/home/cell 
+  #
   def vcard
     @vcard ||= Vpim::Vcard.decode(self.abItem).first
   end
@@ -49,6 +53,30 @@ class Contact < ParseResource::Base
   
   def last_name
     vcard.name.family unless vcard.name.nil?
+  end
+  
+  def phone_numbers
+    if @phone_numbers.nil?
+      @phone_numbers = []
+      unless vcard.telephones.empty?
+        vcard.telephones.each do |phone|
+          @phone_numbers << { phone.phone_type => phone.to_s }
+        end
+      end
+    end
+    @phone_numbers
+  end
+  
+  def emails
+    if @emails.nil?
+      @emails = []
+      unless vcard.emails.empty?
+        vcard.emails.each do |email|
+          @emails << { email.email_type => email.to_s }
+        end
+      end
+    end
+    @emails
   end
   
   def last_name_first
@@ -72,6 +100,10 @@ class Contact < ParseResource::Base
     other_name = other.lastName || other.firstName || other.abDisplayName
     
     this_name.to_s.downcase <=> other_name.to_s.downcase
+  end
+  
+  def self.admin_contacts
+    User.admin.contacts
   end
   
   private
