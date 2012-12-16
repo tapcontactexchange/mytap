@@ -16,8 +16,13 @@ class Vpim::Vcard::Telephone
 end
 
 class Vpim::Vcard::Email
-  
   def email_type
     location.first || nonstandard.first || "email"
+  end
+end
+
+class Vpim::Vcard::Address
+  def address_type
+    location.first || nonstandard.first || "home"
   end
 end

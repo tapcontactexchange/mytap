@@ -56,27 +56,15 @@ class Contact < ParseResource::Base
   end
   
   def phone_numbers
-    if @phone_numbers.nil?
-      @phone_numbers = []
-      unless vcard.telephones.empty?
-        vcard.telephones.each do |phone|
-          @phone_numbers << { phone.phone_type => phone.to_s }
-        end
-      end
-    end
-    @phone_numbers
+    @phone_numbers ||= vcard.telephones
   end
   
   def emails
-    if @emails.nil?
-      @emails = []
-      unless vcard.emails.empty?
-        vcard.emails.each do |email|
-          @emails << { email.email_type => email.to_s }
-        end
-      end
-    end
-    @emails
+    @emails ||= vcard.emails
+  end
+  
+  def addresses
+    @addresses ||= vcard.addresses.empty?
   end
   
   def last_name_first
@@ -103,7 +91,7 @@ class Contact < ParseResource::Base
   end
   
   def self.admin_contacts
-    User.admin.contacts
+    User.admin.contacts.all
   end
   
   private
