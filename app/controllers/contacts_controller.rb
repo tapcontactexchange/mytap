@@ -3,9 +3,9 @@ class ContactsController < ApplicationController
   before_filter :alpha_index
   
   def index
-    # @devices = Rails.cache.fetch('devices') do
-      @devices = Device.find_most_recent_unique_devices_for_user(current_user)
-    # end
+    @devices = Rails.cache.fetch('devices') do
+      Device.find_most_recent_unique_devices_for_user(current_user)
+    end
     
     device = @devices.first
     if params[:device]
@@ -13,10 +13,10 @@ class ContactsController < ApplicationController
     end
       
     @contact_count = Contact.where(:itemOwner => current_user.to_pointer).where(:uuid => "#{device.uuid}").count
-    # Contact
-    # @contacts = Rails.cache.fetch('contacts') do
+
+    @contacts = Rails.cache.fetch('contacts') do
       @contacts = Contact.all_by_alpha_for_user_device(current_user, device)
-    # end
+    end
     @selected = @contacts[@alpha_index.first].first
   end
   
