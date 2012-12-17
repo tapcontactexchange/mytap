@@ -25,4 +25,19 @@ class Vpim::Vcard::Address
   def address_type
     location.first || nonstandard.first || "home"
   end
+  
+  def has_address?
+    !(locality.blank? && region.blank? && country.blank?)
+  end
+  
+  def city_state_zip
+    csz = ""
+    if !locality.blank? && !region.blank?
+      csz = "#{locality}, #{region}"
+    end
+    if !postalcode.blank?
+      csz += " #{postalcode}"
+    end
+    csz
+  end
 end

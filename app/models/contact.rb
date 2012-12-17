@@ -55,8 +55,8 @@ class Contact < ParseResource::Base
     vcard.name.family unless vcard.name.nil?
   end
   
-  def phone_numbers
-    @phone_numbers ||= vcard.telephones
+  def phones
+    @phones ||= vcard.telephones
   end
   
   def emails
@@ -64,7 +64,7 @@ class Contact < ParseResource::Base
   end
   
   def addresses
-    @addresses ||= vcard.addresses.empty?
+    @addresses ||= vcard.addresses
   end
   
   def last_name_first
