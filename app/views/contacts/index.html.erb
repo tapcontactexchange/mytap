@@ -1,12 +1,15 @@
 <div class="row-fluid contacts">
   <div class="span12">
-    <h2>My Contacts</h2>
+    <h2>
+      My Contacts 
+      <span class="entries">(<%= pluralize(@contact_count, "entry") %>)</span>
+    </h2>
     <% if @devices.size > 1 %>
       <% @devices.each do |device| %>
         <%= link_to device.deviceName, contacts_path(:device => device) %>
       <% end %>
     <% end %>
-    Contacts: <%= @contact_count %>
+
     <div class="row-fluid">
       <div class="span4 contact_list">
         <% @alpha_index.each do |key| %>
@@ -22,7 +25,7 @@
           <% end %>
         <% end %>    
       </div>
-      <div id="selected_item" class="span6 contact_data">
+      <div id="selected_item" class="span8 contact_data">
         <%= render :partial => "selected_item" %>
       </div>
     </div>

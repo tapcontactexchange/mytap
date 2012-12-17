@@ -4,7 +4,7 @@
       <%= image_tag("anonymous.gif", :width => 100) %>  
     </div>
   </div>
-  <div class="span6">
+  <div class="span8">
     <h2>
       <%= @selected.full_name %>
     </h2>
@@ -24,7 +24,7 @@
             <%= item.send("#{items.singularize}_type") %>
           </div>
         </div>
-        <div class="span6">
+        <div class="span8">
           <%= item %>
         </div>
       <% end %>
@@ -40,7 +40,7 @@
           <%= address.address_type %>
         </div>
       </div>
-      <div class="span6">
+      <div class="span8">
         <%= address.street %>
         <% if !address.city_state_zip.blank? %>
           <br/><%= address.city_state_zip %>

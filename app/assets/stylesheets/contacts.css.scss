@@ -14,13 +14,22 @@
   overflow-x: hidden;
 }
 
+.contacts .entries {
+  font-size: 85%;
+}
+
 .contact_data {
   padding: 12px 0;
   overflow: hidden;
+  font-size: 110%;
 }
 
 .contact_data .header {
   margin-bottom: 24px;
+}
+
+.contact_data .company {
+  color: #9C9C9C;
 }
 
 .contact_data .header img.spinner {
@@ -28,7 +37,7 @@
 }
 
 .contact_data .details .item-label {
-  color: #9B9B9B;
+  color: #9C9C9C;
 }
 
 .contact_list h3.header {
