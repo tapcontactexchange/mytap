@@ -6,11 +6,25 @@
   height: 90%;
 }
 
-.contact_list {
+.contact_list,
+.contact_data {
   border: 1px solid #CCC;
   height: 600px;
   overflow-y: scroll;
   overflow-x: hidden;
+}
+
+.contact_data {
+  padding: 12px 0;
+  overflow: hidden;
+}
+
+.contact_data .details {
+  margin-top: 24px;
+}
+
+.contact_data .details .item-label {
+  color: #9B9B9B;
 }
 
 .contact_list h3.header {
@@ -23,6 +37,22 @@
   border-bottom: 1px dotted #CCC;
   margin: 0;
   padding: 6px;
+}
+
+.contact_list a p {
+  color: #000;
+}
+
+.contact_list a:hover {
+  text-decoration: none;
+}
+.contact_list a:hover p {
+  color: #0088CC;
+}
+
+.contact_list a p.selected {
+  color: #0088CC;
+  background-color: #F0F3FF;
 }
 
 .contact_list p .highlight {

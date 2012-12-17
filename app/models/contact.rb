@@ -79,6 +79,10 @@ class Contact < ParseResource::Base
     end
   end
   
+  def company
+    vcard.org.try(:first)
+  end
+  
   def names
     "[#{self.lastName}] : [#{self.firstName}] : [#{self.abDisplayName}]"
   end

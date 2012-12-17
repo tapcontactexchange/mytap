@@ -1,6 +1,6 @@
 module ContactsHelper
 
-  def contact_name_formatted(contact, highlight_class=nil)
+  def formatted_contact_name(contact, highlight_class=nil)
     span_class = highlight_class || "highlight"
     html = ""
     if !contact.last_name.blank? && !contact.first_name.blank?
@@ -17,5 +17,9 @@ module ContactsHelper
   
   def highlight(content, css_class)
     content_tag(:span, content, :class => css_class)
+  end
+  
+  def selected_contact(contact, selected)
+    selected == contact ? "selected" : ""
   end
 end
