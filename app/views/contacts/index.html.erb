@@ -2,11 +2,11 @@
   <div class="span12">
     <h2>
       My Contacts 
-      <span class="entries">(<%= pluralize(@contact_count, "entry") %>)</span>
+      <span class="entries">(<%= @device.deviceName %> : <%= pluralize(@contact_count, "entry") %>)</span>
     </h2>
     <% if @devices.size > 1 %>
       <% @devices.each do |device| %>
-        <%= link_to device.deviceName, contacts_path(:device => device) %>
+        <%= link_to(device.deviceName, contacts_path(:device => device)) if @device != device %>
       <% end %>
     <% end %>
 

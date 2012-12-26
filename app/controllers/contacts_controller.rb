@@ -5,13 +5,13 @@ class ContactsController < ApplicationController
   def index
     @devices = Device.find_most_recent_unique_devices_for_user(current_user)
     
-    device = @devices.first
+    @device = @devices.first
     if params[:device]
-      @devices.each{|d| device = d if d.id == params[:device]}
+      @devices.each{|d| @device = d if d.id == params[:device]}
     end
       
-    @contact_count = Contact.where(:itemOwner => current_user.to_pointer).where(:uuid => "#{device.uuid}").count
-    @contacts = Contact.all_by_alpha_for_user_device(current_user, device)
+    @contact_count = Contact.where(:itemOwner => current_user.to_pointer).where(:uuid => "#{@device.uuid}").count
+    @contacts = Contact.all_by_alpha_for_user_device(current_user, @device)
     @selected = @contacts[@alpha_index.first].first
   end
   

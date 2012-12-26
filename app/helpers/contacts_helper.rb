@@ -22,4 +22,8 @@ module ContactsHelper
   def selected_contact(contact, selected)
     selected == contact ? "selected" : ""
   end
+
+  def selected_item(item, selected)
+    selected == item ? "selected" : ""
+  end
 end
