@@ -1,5 +1,5 @@
 # Extensions to vCard handling gem
-  
+
 class Vpim::Vcard::Telephone
 
   # gets the first entry in the location or nonstandard
