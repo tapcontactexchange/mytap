@@ -12,7 +12,8 @@ class ContactsController < ApplicationController
       
     @contact_count = Contact.where(:itemOwner => current_user.to_pointer).where(:uuid => "#{@device.uuid}").count
     @contacts = Contact.all_by_alpha_for_user_device(current_user, @device)
-    @selected = @contacts[@alpha_index.first].first
+    key = @contacts.first[0]
+    @selected = @contacts[key].first if @contacts.any?
   end
   
   def show
@@ -22,6 +23,6 @@ class ContactsController < ApplicationController
   private
   
   def alpha_index
-    @alpha_index = ("A".."Z").to_a << '#'
+    @alpha_index ||= ("A".."Z").to_a << '#'
   end
 end
