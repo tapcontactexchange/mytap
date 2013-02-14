@@ -25,8 +25,9 @@ end
 group :development do
   gem 'sqlite3'
   gem 'memcache-client'
-  gem 'thin'
 end
+
+gem 'thin'
 
 gem 'jquery-rails', '~> 2.1.0'
 
