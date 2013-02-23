@@ -1,0 +1,54 @@
+<div class="row-fluid header">
+  <div class="span4">
+    <div class="pull-right">
+      <%= image_tag("anonymous.gif", :width => 100) %>  
+    </div>
+  </div>
+  <div class="span8">
+    <h2>
+      <%= @selected.full_name %>
+    </h2>
+    <div class="company">
+      <%= @selected.company %>
+    </div>
+  </div>
+</div>
+
+<% %w(phones emails).each do |items| %>
+  <% data_items = @selected.send(items.to_sym) || [] %>
+  <% if data_items.any? %>
+    <% data_items.each do |item| %>
+      <div class="row-fluid details">
+        <div class="span4">
+          <div class="pull-right item-label">
+            <%= item.send("#{items.singularize}_type") %>
+          </div>
+        </div>
+        <div class="span8">
+          <%= item %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
+
+<% @selected.addresses.each do |address| %>
+  <% if address.has_address? %>
+    <div class="row-fluid details">
+      <div class="span4">
+        <div class="pull-right item-label">
+          <%= address.address_type %>
+        </div>
+      </div>
+      <div class="span8">
+        <%= address.street %>
+        <% if !address.city_state_zip.blank? %>
+          <br/><%= address.city_state_zip %>
+        <% end%>
+        <% if !address.country.blank? %>
+          <br/><%= address.country %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

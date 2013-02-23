@@ -1,0 +1,3 @@
+$('.contact_list .selected').removeClass("selected")
+$("#contact_<%= @selected.id %>").addClass("selected")
+$('#selected_item').html("<%= escape_javascript(render(:partial => 'contacts/selected_item')) %>")

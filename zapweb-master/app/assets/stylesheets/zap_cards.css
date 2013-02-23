@@ -1,0 +1,151 @@
+a {
+	color: white;
+}
+
+#card_wrapper {
+  height: 400px;
+  margin-top: 10px;
+}
+
+.basic {
+  border: 1px solid #ccc;
+  width: 300px;
+  height: 100%;
+  background-color: #ebebeb;
+  float: left;
+}
+
+.basic a {
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #999;
+  cursor: pointer;
+  display: block;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 4px;
+  outline: none;
+}
+
+.basic p {
+  font-size: 90%;
+  margin: 0;
+  padding: 10px;
+}
+
+.more_info {
+  padding: 10px;
+}
+
+#more_infos .title {
+  text-align: center;
+  padding: 8px;
+  color: #7f7f7f;
+  font-size: 150%;
+}
+
+#more_infos .more_info_wrapper {
+  float: left;
+  clear: both;
+  margin: 0 0 10px 0;
+  width: 100%;
+}
+
+#more_infos a {
+  border: none;
+  font-weight: normal;
+  color: #3D3D3D;
+}
+
+#more_infos a.delete_link {
+  float: left;
+  padding-left: 10px;
+  color: #DA4F49;
+}
+
+#more_infos .no_more_info {
+  color: #7F7F7F;
+  margin: 10px;
+}
+
+a.file_link {
+  padding-left: 35px;
+  float: left;
+  font-size: 120%;
+}
+
+a.file_link:hover {
+  text-decoration: underline;
+}
+
+a.xls,
+a.xlsx {
+  background: transparent url(xls.png) no-repeat center left;
+}
+
+a.doc,
+a.docx {
+  background: transparent url(doc.png) no-repeat center left;
+}
+
+a.ppt,
+a.pptx {
+  background: transparent url(ppt.png) no-repeat center left;
+}
+
+a.png {
+  background: transparent url(png.png) no-repeat center left;
+}
+
+a.jpg,
+a.jpeg {
+  background: transparent url(jpg.png) no-repeat center left;
+}
+
+a.key {
+  background: transparent url(key.png) no-repeat center left;
+}
+
+a.numbers {
+  background: transparent url(numbers.png) no-repeat center left;
+}
+
+a.pages {
+  background: transparent url(pages.png) no-repeat center left;
+}
+
+a.pdf {
+  background: transparent url(pdf.png) no-repeat center left;
+}
+
+a.txt {
+  background: transparent url(txt.png) no-repeat center left;
+}
+
+a.zip {
+  background: transparent url(zip.png) no-repeat center left;
+}
+
+a.mp4,
+a.video {
+  background: transparent url(video.png) no-repeat center left;
+}
+
+a.mp3 {
+  background: transparent url(mp3.png) no-repeat center left;
+}
+.no_propack {
+  text-align: center;
+}
+
+.no_propack img {
+  height: 180px;
+  margin-top: 30px;
+}
+
+.no_propack p {
+  margin: 10px 20px;
+  text-align: center;
+  padding: 0;
+  color: #696969;
+  font-size: 100%;
+}

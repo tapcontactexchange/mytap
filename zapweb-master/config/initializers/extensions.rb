@@ -1,0 +1,1 @@
+require "#{Rails.root}/lib/vpim_extensions.rb"
