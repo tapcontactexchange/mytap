@@ -27,12 +27,7 @@ group :development do
   gem 'memcache-client'
 end
 
-gem 'thin'
-
 gem 'jquery-rails', '~> 2.1.0'
-
-# For JSON security issue CVE-2013-0269
-gem 'json', '1.7.7'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
