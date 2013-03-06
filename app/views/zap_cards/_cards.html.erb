@@ -1,0 +1,51 @@
+<div id="card_wrapper">
+  <div id="cards" class="basic">
+    <% @zap_cards.each do |card| %>
+      <%= link_to card.cardName, '#', :id => card.card_name_key, :class => 'toggle_more_info' %>
+      <div class="card_info">
+        <p class="name"><%= card.first_name_last %></p>
+        <%= content_tag(:p, card.organization) unless card.organization.blank? %>
+        <%= content_tag(:p, card.title) unless card.title.blank? %>
+      </div>
+    <% end %>
+  </div>
+  <div id="more_infos" class="basic">
+    <div class="title">
+      More Info
+    </div>
+
+    <% if current_user.pro_pack? %>
+      <% @zap_cards.each_with_index do |card, index| %>
+        <div id="more_info_<%= card.card_name_key %>" class="more_info" style="display:none;">
+          <% card.more_infos.each do |mi| %>
+            <%= render :partial => "more_info", :locals => {:card => card, :current_card => index, :mi => mi} %>
+          <% end %>
+
+          <% if card.more_infos.size < 4 %>
+            <h4>Add another More Info file</h4>
+            <%= form_for card, :url => add_more_info_zap_card_path(card, :current_card => index), 
+              :method => :post, :multipart => true do |f| %>
+              <label>File:</label><%= f.file_field :more_info_file %>
+              <br/>
+              <label>File title:</label><%= f.text_field :file_title %>
+              <br/>
+              <%= submit_tag "Upload", :class => 'btn btn-small btn-primary' %>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="no_propack">
+        <%= image_tag 'pad_lock.png', :title => "ProPackage not purchased" %>
+        <p>
+          More info is locked. To activate, please join our professional package.
+        </p>
+      </div>
+    <% end -%>
+  </div>  
+</div>
+<script type="text/javascript" charset="utf-8">
+  $(function() {
+    $("#cards").accordion("option", "active", <%= @current_card %>)
+  });
+</script>
