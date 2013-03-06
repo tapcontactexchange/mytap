@@ -15,3 +15,5 @@
 /tmp
 .rvmrc
 .ruby-version
+push-to-github.sh
+push-to-heroku.sh
