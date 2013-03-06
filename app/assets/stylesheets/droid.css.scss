@@ -1,0 +1,36 @@
+$light_holo_blue: #33b5e5;
+$trans_holo_blue: rgba(51, 181, 229, 88);
+$middlebg: #cfcfcf;
+$highbg: #eee;
+$lowbg: #aaa;
+$transbg: rgba(238, 238, 238, 88);
+
+body {
+	background: $middlebg;
+	color: #000;
+}
+.navbar-inner {
+	background: $highbg;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+.basic {
+	background: $highbg;
+	border: none;
+}
+.ui-accordion {
+	background: $lowbg;
+}
+.basic a {
+	border-top: none;
+	border-bottom: solid 1px #666;
+	color: #000;
+}
+.basic a.ui-state-active {
+	background: $trans_holo_blue;
+}
+.title {
+	color: $light_holo_blue;
+	border-bottom: solid 1px $light_holo_blue;
+}
