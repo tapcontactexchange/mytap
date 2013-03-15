@@ -1,14 +1,10 @@
-= link_to "Tap App", root_path, :class => 'brand'
+= link_to "Tap Contact Exchange", "http://canitapyou.com", :class => 'brand'
 %ul.nav
   - if logged_in?
     %li
       = link_to "TAP Cards", zap_cards_path
     %li
       = link_to "Contacts", contacts_path
-  %li
-    = link_to "Features", '#'
-  %li
-    = link_to "FAQ", '#'
     
 %ul.nav.pull-right
   - if logged_in?
