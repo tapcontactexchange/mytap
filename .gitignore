@@ -17,3 +17,4 @@
 .ruby-version
 push-to-github.sh
 push-to-heroku.sh
+.DS_Store 
