@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/testflyjets/parse_resource.git
-  revision: b895337dcb59b3a0c52d64ca999207f96af23473
+  revision: 8fa98172c5d1ae226c03ce7192fc650bad9a89d7
   specs:
-    parse_resource (1.7.3209)
+    parse_resource (1.7.3220)
       activemodel
       activesupport
       rest-client
