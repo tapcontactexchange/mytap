@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   
   def new
-    logout_killing_session!
+    logout_keeping_session!
   end
 
   def create
