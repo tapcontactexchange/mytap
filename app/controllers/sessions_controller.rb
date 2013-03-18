@@ -6,6 +6,10 @@ class SessionsController < ApplicationController
 
   def create
     user = User.authenticate(params[:username], params[:password])
+    # Use this line for debugging in order to load specific user data
+    # without knowing their password.
+    #    user = User.find_by_username params[:username]
+    # But DON'T DEPLOY IT WITH THIS!!!  HUGE SECURITY HOLE if you do.
     if user
       self.current_user = user
       redirect_to zap_cards_path

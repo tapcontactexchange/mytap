@@ -75,7 +75,7 @@ class Contact < ParseResource::Base
     elsif !first_name.blank?
       first_name
     else
-      abDisplayName
+      abDisplayName.to_s
     end
   end
   
