@@ -23,11 +23,11 @@ group :assets do
 end
 
 group :development do
-  gem 'thin'
   gem 'sqlite3'
   gem 'memcache-client'
 end
 
+gem 'thin'
 gem 'jquery-rails', '~> 2.1.0'
 
 # To use ActiveModel has_secure_password
