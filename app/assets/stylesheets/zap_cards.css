@@ -3,7 +3,7 @@ a {
 }
 
 #card_wrapper {
-  height: 400px;
+  height: 600px;
   margin-top: 10px;
 }
 
@@ -34,7 +34,10 @@ a {
 
 .more_info {
   padding: 10px;
+  height: 540px;
+  overflow: scroll;
 }
+
 
 #more_infos .title {
   text-align: center;

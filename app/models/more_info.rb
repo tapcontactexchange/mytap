@@ -7,6 +7,8 @@ class MoreInfo < ParseResource::Base
   file_fields :image
   
   belongs_to :zap_card
+
+  MAX_FILES = 12
   
   def valid?
     !(self.fileName.blank? || self.fileTitle.blank?)

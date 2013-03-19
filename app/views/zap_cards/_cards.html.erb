@@ -21,7 +21,7 @@
             <%= render :partial => "more_info", :locals => {:card => card, :current_card => index, :mi => mi} %>
           <% end %>
 
-          <% if card.more_infos.size < 4 %>
+          <% if card.more_infos.size < MoreInfo::MAX_FILES %>
             <h4>Add another More Info file</h4>
             <%= form_for card, :url => add_more_info_zap_card_path(card, :current_card => index), 
               :method => :post, :multipart => true do |f| %>
