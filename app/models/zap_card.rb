@@ -17,6 +17,10 @@ class ZapCard < ParseResource::Base
     "#{firstName} #{lastName}"
   end
 
+  def last_name_first
+    "#{lastName}, #{firstName}"
+  end
+
   def card_name_key
     self.cardName.downcase.gsub(/\s/, "_")
   end

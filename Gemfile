@@ -45,9 +45,9 @@ gem 'jquery-rails', '~> 2.1.0'
 # To use debugger
 # gem 'debugger'
 
-gem "parse_resource", :git =>  'git://github.com/testflyjets/parse_resource.git'
+gem "parse_resource", #:git =>  'git://github.com/testflyjets/parse_resource.git'
 # :git =>  'git://github.com/testflyjets/parse_resource.git'
-# :path => '/Users/chris/rails/parse_resource'
+:path => '/Users/chris/rails/parse_resource'
 
 gem "vcard", '0.1.1'
 # gem "vpim"
