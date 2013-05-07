@@ -15,6 +15,12 @@ module ContactsHelper
     html.html_safe
   end
   
+  def tap_card_icon(contact)
+    if contact.is_a? CardContact
+      content_tag(:span, "TAP", class: "contact_card")
+    end
+  end
+
   def highlight(content, css_class)
     content_tag(:span, content, :class => css_class)
   end
