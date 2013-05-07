@@ -17,6 +17,7 @@ class CardContact
   alias :abDisplayName :full_name 
 
   Address = Struct.new(:address_type, :street, :city, :state, :zip, :country) do
+
     def city_state_zip
       csz = nil
       if !city.blank? && !state.blank?
@@ -34,10 +35,23 @@ class CardContact
       end
       csz
     end
+
+    def has_address?
+      !(street.blank? && city.blank? && state.blank?)
+    end
   end
 
-  Phone = Struct.new(:phone_type, :phone)
-  Email = Struct.new(:email_type, :email)
+  Phone = Struct.new(:phone_type, :phone) do
+    def to_s
+      self.phone
+    end
+  end
+
+  Email = Struct.new(:email_type, :email) do
+    def to_s
+      self.email
+    end
+  end
 
   def initialize(card)
     @id         = card.objectId
@@ -69,7 +83,7 @@ class CardContact
   def build_phones(card)
     phones = []
     PHONE_ATTRS.each do |phone|
-      if !card.send(phone).nil?
+      if !card.send(phone).blank?
         phones << Phone.new(phone_type(phone), card.send(phone))
       end
     end
@@ -80,11 +94,15 @@ class CardContact
   def build_emails(card)
     emails = []
     EMAIL_ATTRS.each do |email|
-      if !card.send(email).nil?
+      if !card.send(email).blank?
         emails << Email.new(email_type(email), card.send(email))
       end
     end
     emails
+  end
+
+  def company
+    nil  
   end
 
   # returns 'iPhone', 'home', 'company main', etc.
