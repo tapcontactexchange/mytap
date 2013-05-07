@@ -22,7 +22,7 @@ class Contact < ParseResource::Base
   
   # retrieve all the contacts for a user and device then
   # group them in a hash with keys representing the first letter of the contact name
-  # group all the non-alpha contacts names in a single group 
+  # group all the non-alpha contacts names in a single group with +#+ as the key
   def self.all_by_alpha_for_user_device(user, device)
     contacts = self.all_for_user_device(user, device)
     grouped_contacts = contacts.group_by{|c| c.last_name_first.upcase[0]}

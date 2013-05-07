@@ -17,7 +17,7 @@
             <%= key %>
           </h3>
           <% @contacts[key].try(:each) do |contact| %>
-            <%= link_to contact_path(contact.id, type: contact.class.name.downcase), :remote => true do %>
+            <%= link_to contact_path(contact.id, type: contact.class.name.underscore), :remote => true do %>
               <p id='<%= "contact_#{contact.id}" %>' class='<%= selected_contact(contact, @selected) %>'>
                 <%= formatted_contact_name(contact) %>
               </p>

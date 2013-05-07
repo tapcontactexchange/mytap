@@ -27,6 +27,10 @@ group :development do
   gem 'memcache-client'
 end
 
+group :test do
+  gem 'factory_girl'
+end
+
 gem 'thin'
 gem 'jquery-rails', '~> 2.1.0'
 

@@ -16,7 +16,11 @@ class ContactsController < ApplicationController
   end
   
   def show
-    @selected = Contact.where(:itemOwner => current_user.to_pointer).where(:objectId => params[:id]).first
+    if params[:type] == "contact"
+      @selected = Contact.where(:itemOwner => current_user.to_pointer).where(:objectId => params[:id]).first
+    elsif params[:type] == "exchanged_card"
+      @selected = ExchangedCard.where(:cardRecipient => current_user.to_pointer).where(:objectId => params[:id]).first
+    end
   end
   
   private
