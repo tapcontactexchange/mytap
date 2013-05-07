@@ -11,6 +11,11 @@ class CardContact
   PHONE_ATTRS   = %w(iPhone mobile home homeFax workFax companyMain work)
   EMAIL_ATTRS   = %w(homeEmail workEmail otherEmail)
 
+  # aliases to allow comparing Contact to CardContact
+  alias :firstName :first_name
+  alias :lastName :last_name
+  alias :abDisplayName :full_name 
+
   Address = Struct.new(:address_type, :street, :city, :state, :zip, :country) do
     def city_state_zip
       csz = nil
@@ -43,6 +48,10 @@ class CardContact
     @addresses  = build_addresses(card)
     @phones     = build_phones(card)
     @emails     = build_emails(card)
+  end
+
+  def last_name_first
+    "#{last_name}, #{first_name}"
   end
 
   # build an address from the city, state, etc. attributes, but only
@@ -95,9 +104,43 @@ class CardContact
     this_name.to_s.downcase <=> other_name.to_s.downcase
   end
 
+  # Creates a collection of +CardContacts+ for each of the user's +ExchangedCards+.  It gets the
+  # +ZapCard+ from each +ExchangedCard+ and creates a Contact Card from it, then groups them
+  # by the first letter of the last name.
   def self.all_by_alpha_for_user(user)
     cards = ExchangedCard.where(:cardRecipient => user.to_pointer).limit(1000).include_object(:zapCard).all
-    card_contacts = cards.collect{ |card| CardContact.new(card.zapCard)}
-    card_contacts.sort
+    contacts = cards.collect{ |card| CardContact.new(card.zapCard)}
+    contacts.sort
+
+    grouped_contacts = contacts.group_by{|c| c.last_name_first.upcase[0]}
+    non_alpha_keys = grouped_contacts.keys - ("A".."Z").to_a
+    non_alpha_keys.each do |key|
+      grouped_contacts.has_key?('#') ? grouped_contacts['#'] += grouped_contacts[key] 
+                                     : grouped_contacts['#'] = grouped_contacts[key]
+      grouped_contacts.delete(key)
+    end
+    grouped_contacts
+  end
+
+    # merges two sets of grouped contacts into a single grouped set, 
+  # ordered by last_name, first_name
+  def self.merge_contacts(contacts, card_contacts)
+    contacts.each_key do |k|
+      if card_contacts.has_key?(k)
+        sort_merge!(k, contacts, card_contacts)
+      end
+    end
+
+    # merge in the remaining keys from card_contacts
+    contacts.merge!(card_contacts)
+  end
+
+  # merges the values of +key+ from card_contacts into
+  # contacts, sorting the items as they're merged, then
+  # deletes the key from card_contacts
+  def self.sort_merge!(key, contacts, card_contacts)
+    contacts[key] += card_contacts[key]
+    contacts[key].sort
+    card_contacts.delete(key)
   end
 end
