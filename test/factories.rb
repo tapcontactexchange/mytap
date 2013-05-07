@@ -1,6 +1,7 @@
 FactoryGirl.define do
   
   factory :zap_card do
+    id        ""
     firstName "Bill"
     lastName  "Tapper"
     company   "Tap.com"

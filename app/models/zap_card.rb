@@ -8,7 +8,8 @@ class ZapCard < ParseResource::Base
          :workEmail, :workFax, :zip
                   
   belongs_to :cardOwner, :class_name => 'User'
-  
+  belongs_to :company,   :class_name => 'Company'
+
   has_many :more_infos, :inverse_of => :zapCard
   
   attr_accessor :more_info_file, :file_title

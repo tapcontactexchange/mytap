@@ -1,10 +1,10 @@
-# This class is a proxy class that allows us to treat TAP card
+# This class is a proxy class that allows us to treat ZapCard
 # contact information just like a regular Contact.  With this we 
 # can show TAP card contact information alongside the regular backed-up
 # contacts like the mobile app does.
 class CardContact
 
-  attr_reader :card, :first_name, :last_name, :full_name, :company, 
+  attr_reader :id, :card, :first_name, :last_name, :full_name,
     :addresses, :phones, :emails
 
   ADDRESS_ATTRS = %w(street city state zip country)
@@ -35,10 +35,10 @@ class CardContact
   Email = Struct.new(:email_type, :email)
 
   def initialize(card)
+    @id         = card.objectId
     @card       = card
     @first_name = card.firstName
     @last_name  = card.lastName
-    @company    = card.company
     @full_name  = card.first_name_last
     @addresses  = build_addresses(card)
     @phones     = build_phones(card)
@@ -56,6 +56,7 @@ class CardContact
     addresses
   end
 
+  # build an array of phone numbers
   def build_phones(card)
     phones = []
     PHONE_ATTRS.each do |phone|
@@ -66,6 +67,7 @@ class CardContact
     phones
   end
 
+  # build an array of email addresses
   def build_emails(card)
     emails = []
     EMAIL_ATTRS.each do |email|
@@ -76,12 +78,26 @@ class CardContact
     emails
   end
 
-  # returns iPhone, home, company main, etc.
+  # returns 'iPhone', 'home', 'company main', etc.
   def phone_type(phone)
     phone == 'iPhone' ? phone : phone.titleize.downcase
   end
 
+  # retuns 'home', 'work', etc.
   def email_type(email)
     email.titleize.split(' ').first.downcase
+  end
+
+  def <=>(other)
+    this_name = self.last_name || self.first_name || self.full_name
+    other_name = other.last_name || other.first_name || other.full_name
+    
+    this_name.to_s.downcase <=> other_name.to_s.downcase
+  end
+
+  def self.all_by_alpha_for_user(user)
+    cards = ExchangedCard.where(:cardRecipient => user.to_pointer).limit(1000).include_object(:zapCard).all
+    card_contacts = cards.collect{ |card| CardContact.new(card.zapCard)}
+    card_contacts.sort
   end
 end

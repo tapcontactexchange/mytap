@@ -11,15 +11,20 @@ class ContactsController < ApplicationController
     end
       
     @contact_count = Contact.where(:itemOwner => current_user.to_pointer).where(:uuid => "#{@device.uuid}").count
-    @contacts = Contact.all_by_alpha_for_user_device(current_user, @device)
+    @backup_contacts = Contact.all_by_alpha_for_user_device(current_user, @device)
+    @card_contacts = CardContact.all_by_alpha_for_user(current_user)
+
+    @contacts = @backup_contacts
     @selected = @contacts[@alpha_index.first].first
   end
   
   def show
     if params[:type] == "contact"
       @selected = Contact.where(:itemOwner => current_user.to_pointer).where(:objectId => params[:id]).first
-    elsif params[:type] == "exchanged_card"
-      @selected = ExchangedCard.where(:cardRecipient => current_user.to_pointer).where(:objectId => params[:id]).first
+    elsif params[:type] == "card_contact"
+      exchanged_card = ExchangedCard.where(:cardRecipient => current_user.to_pointer).where(:objectId => params[:id]).first
+      zap_card = exchanged_card.zapCard
+      @selected = CardContact.new(zap_card)
     end
   end
   
