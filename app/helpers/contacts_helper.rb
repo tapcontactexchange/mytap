@@ -17,7 +17,8 @@ module ContactsHelper
   
   def tap_card_icon(contact)
     if contact.is_a? CardContact
-      content_tag(:span, "TAP", class: "contact_card")
+      image_tag "mycards.png", class: "contact_card"
+      # content_tag(:span, "TAP", class: "contact_card")
     end
   end
 
