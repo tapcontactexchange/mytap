@@ -78,6 +78,18 @@ class Contact < ParseResource::Base
       abDisplayName.to_s
     end
   end
+
+  def last_name_first_safe
+    if !lastName.blank? && !firstName.blank?
+      "#{lastName}, #{firstName}"
+    elsif !lastName.blank?
+      lastName
+    elsif !firstName.blank?
+      firstName
+    else
+      abDisplayName.to_s
+    end    
+  end
   
   def company
     vcard.org.try(:first)
@@ -88,10 +100,7 @@ class Contact < ParseResource::Base
   end
   
   def <=>(other)
-    this_name = self.lastName || self.firstName || self.abDisplayName
-    other_name = other.lastName || other.firstName || other.abDisplayName
-    
-    this_name.to_s.downcase <=> other_name.to_s.downcase
+    self.last_name_first_safe.to_s.downcase <=> other.last_name_first_safe.to_s.downcase
   end
   
   def self.admin_contacts

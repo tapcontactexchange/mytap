@@ -4,7 +4,7 @@
 # contacts like the mobile app does.
 class CardContact
 
-  attr_reader :id, :card, :first_name, :last_name, :full_name,
+  attr_reader :id, :card, :first_name, :last_name, :full_name, :company,
     :addresses, :phones, :emails
 
   ADDRESS_ATTRS = %w(street city state zip country)
@@ -54,10 +54,11 @@ class CardContact
   end
 
   def initialize(card)
-    @id         = card.objectId
+    @id         = card.id
     @card       = card
     @first_name = card.firstName
     @last_name  = card.lastName
+    @company    = build_company(card)
     @full_name  = card.first_name_last
     @addresses  = build_addresses(card)
     @phones     = build_phones(card)
@@ -65,9 +66,28 @@ class CardContact
   end
 
   def last_name_first
-    "#{last_name}, #{first_name}"
+    if !last_name.blank? && !first_name.blank?
+      "#{last_name}, #{first_name}"
+    elsif !last_name.blank?
+      last_name
+    elsif !first_name.blank?
+      first_name
+    else
+      full_name
+    end
   end
 
+  alias :last_name_first_safe :last_name_first
+
+  # gets the company name if one is provided
+  def build_company(card)
+    company = card.company
+    if company
+      company.companyCode.titleize
+    else
+      nil
+    end
+  end
   # build an address from the city, state, etc. attributes, but only
   # if there's a value in at least one of them, otherwise return an 
   # empty array
@@ -140,7 +160,11 @@ class CardContact
     grouped_contacts
   end
 
-    # merges two sets of grouped contacts into a single grouped set, 
+  def to_s
+    "#<#{self.class.name}: #{last_name}, #{first_name}>"
+  end
+
+  # merges two sets of grouped contacts into a single grouped set, 
   # ordered by last_name, first_name
   def self.merge_contacts(contacts, card_contacts)
     contacts.each_key do |k|
@@ -158,7 +182,26 @@ class CardContact
   # deletes the key from card_contacts
   def self.sort_merge!(key, contacts, card_contacts)
     contacts[key] += card_contacts[key]
-    contacts[key].sort
+    contacts[key].sort!{|c1, c2| sort_contacts(c1, c2)}
     card_contacts.delete(key)
+    contacts[key]
+  end
+
+  # compares 
+  def self.sort_contacts(c1, c2)
+    if c1.is_a?(c2.class)
+      c1 <=> c2
+    else
+      if c1.is_a? Contact
+        compare_contacts(c1, c2)
+      else
+        compare_contacts(c2, c1)
+      end
+    end
+  end
+
+  # compares a Contact and a CardContact for sorting
+  def self.compare_contacts(contact, card_contact)    
+    contact.last_name_first.to_s.downcase <=> card_contact.last_name_first.to_s.downcase
   end
 end

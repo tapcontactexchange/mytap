@@ -1,10 +1,8 @@
 FactoryGirl.define do
   
   factory :zap_card do
-    id        ""
     firstName "Bill"
     lastName  "Tapper"
-    company   "Tap.com"
     title     "CEO"
 
     street    "123 Maple St."
@@ -20,5 +18,13 @@ FactoryGirl.define do
 
     homeEmail "tapper@example.com"
     workEmail "tapper@tap.com"
+  end
+
+  factory :contact do
+
+  end
+
+  factory :card_contact do
+
   end
 end
